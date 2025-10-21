@@ -6,6 +6,7 @@
 #include <stack>
 #include <string>
 #include "heap.h"
+#include <bits/stdc++.h>
 using namespace std;
 
 // Global arrays for node information
@@ -23,6 +24,7 @@ void generateCodes(int root, string codes[]);
 void encodeMessage(const string& filename, string codes[]);
 
 int main() {
+
     int freq[26] = {0};
 
     // Step 1: Read file and count letter frequencies
@@ -98,6 +100,7 @@ int buildEncodingTree(int nextFree) {
     //    - Set left/right pointers
     //    - Push new parent index back into the heap
     // 4. Return the index of the last remaining node (root)
+
     return -1; // placeholder
 }
 
