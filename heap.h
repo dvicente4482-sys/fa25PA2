@@ -49,14 +49,31 @@ struct MinHeap {
         return minIdx; // placeholder
     }
 
-    void upheap(int pos, int weightArr[]) { //Resorts heap upwards
+    void upheap(int pos, int weightArr[]) { //Resorts heap upwards, pos represents the index of data to perform the reheap.
         // TODO: swap child upward while smaller than parent
         //Implement the parent and Left/right methods to achieve the logic and function.
+        while (pos>0) {
+            int Par = parent(pos);
+            if (weightArr[pos] >= weightArr[Par]) break;
+            swap(weightArr[pos],weightArr[Par]);
+            pos = Par;
+        }//Ripped Straight out of the C++ Supplement
+
     }
 
     void downheap(int pos, int weightArr[]) { //Resorts heap downwards
         // TODO: swap parent downward while larger than any child
         //Implement the parent and Left/right methods to achieve the logic and function.
+        int size = weightArr[].length();
+
+        while (left(pos) <size) {
+            int left1 = left(pos);
+            int right1 = right(pos);
+            int smallest = left1;
+            if (right < size && weightArr[right] < weightArr[left])
+                smallest = right;
+        }
+
     }
 };
 
