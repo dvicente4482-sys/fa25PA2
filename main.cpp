@@ -101,10 +101,8 @@ int buildEncodingTree(int nextFree) {
     //    - Push new parent index back into the heap
     // 4. Return the index of the last remaining node (root)
     MinHeap Heap;
-
     for (int i = 0; i< nextFree; ++i) {
         Heap.push(i,weightArr);
-
     }
     while (Heap.size>1) {
         int a = Heap.pop(weightArr);
@@ -122,8 +120,26 @@ int buildEncodingTree(int nextFree) {
 void generateCodes(int root, string codes[]) {
     // TODO:
     // Use stack<pair<int, string>> to simulate DFS traversal.
+    //DFS traversal means: its a way of traversing a tree through nodes and their neighbors
+    //Starts at Top then traverses down to neighbors
+    stack<pair<int, string>> tempStack;
+    stack<pair<int, string>> newStack;
+    //int i = sizeof(*codes); Retrieves size of codes
+    tempStack.emplace(root, ""); //Directly adds to stack.
+    while (!tempStack.empty()) {
+        auto p = tempStack.top(); // Retrieves top when stack is not empty
+        //To view neighboring i should A, pop it, or B, use nodes
+        int node = p.first;
+        string path = p.second;
+        tempStack.pop();
+        //Something becomes the value of P.
+        //newStack.push(p);
+    }
+
     // Left edge adds '0', right edge adds '1'.
     // Record code when a leaf node is reached.
+
+
 }
 
 // Step 5: Print table and encoded message
