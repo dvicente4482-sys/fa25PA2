@@ -133,7 +133,7 @@ void generateCodes(int root, string codes[]) {
     //Starts at Top then traverses down to neighbors
 
     stack<pair<int, string>> tempStack;
-    stack<pair<int, string>> newStack;
+
 
     tempStack.emplace(root, ""); //Directly adds to stack.
     while (!tempStack.empty()) {
