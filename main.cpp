@@ -22,6 +22,9 @@ int createLeafNodes(int freq[]);
 int buildEncodingTree(int nextFree);
 void generateCodes(int root, string codes[]);
 void encodeMessage(const string& filename, string codes[]);
+inline bool isLeaf(int idx) {
+    return leftArr[idx] == -1 && rightArr[idx] == -1;
+}
 
 int main() {
 
@@ -107,10 +110,16 @@ int buildEncodingTree(int nextFree) {
     while (Heap.size>1) {
         int a = Heap.pop(weightArr);
         int b = Heap.pop(weightArr);
-        int parent = nextFree;
+        int parent = nextFree++;
+        if (nextFree > MAX_NODES) { //Check condition for Size
+            cout<<" Exceeded Max Nodes";
+            break;
+        }
         weightArr[parent] = weightArr[a] + weightArr[b]; //Combines the weight of smallest and next smallest Index
-        ++nextFree;
-        Heap.push(parent,weightArr);
+        leftArr[parent]  = a; //Identifies left child as A
+        rightArr[parent] = b; //Identifies right child as B
+
+        Heap.push(parent,weightArr); //Pushes new parent back int othe heap
     }
     int root = Heap.pop(weightArr);
     return root; //returns root
@@ -122,9 +131,10 @@ void generateCodes(int root, string codes[]) {
     // Use stack<pair<int, string>> to simulate DFS traversal.
     //DFS traversal means: its a way of traversing a tree through nodes and their neighbors
     //Starts at Top then traverses down to neighbors
+
     stack<pair<int, string>> tempStack;
     stack<pair<int, string>> newStack;
-    //int i = sizeof(*codes); Retrieves size of codes
+
     tempStack.emplace(root, ""); //Directly adds to stack.
     while (!tempStack.empty()) {
         auto p = tempStack.top(); // Retrieves top when stack is not empty
@@ -133,7 +143,7 @@ void generateCodes(int root, string codes[]) {
         string path = p.second;
         tempStack.pop();
         //Something becomes the value of P.
-        //newStack.push(p);
+        codes[node] = path; //Updates code with stack
     }
 
     // Left edge adds '0', right edge adds '1'.
