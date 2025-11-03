@@ -47,7 +47,7 @@ struct MinHeap {
         int minIdx = data[0];
         // move last to root
         data[0] = data[size - 1];
-        --size;
+        --size; //deincrements size
         if (size != 0) downheap(0, weightArr);
         return minIdx; // placeholder
     }
@@ -68,17 +68,17 @@ struct MinHeap {
         // TODO: swap parent downward while larger than any child
         //Implement the parent and Left/right methods to achieve the logic and function.
         while (left(pos) <size) {
-            int left1 = left(pos);
-            int right1 = right(pos);
-            int smallest = pos;
+            int left1 = left(pos); //creates left node
+            int right1 = right(pos); //creates right node
+            int smallest = pos; //sets the parameter as the smallest and then allows following code
 
-            if (left1 < size && weightArr[data[left1]] < weightArr[data[smallest]]) smallest = left1;
-            if (right1 < size && weightArr[data[right1]] < weightArr[data[smallest]]) smallest = right1;
+            if (left1 < size && weightArr[data[left1]] < weightArr[data[smallest]]) smallest = left1; //compares weight, if it passes then it updates with the new smallest to left
+            if (right1 < size && weightArr[data[right1]] < weightArr[data[smallest]]) smallest = right1; //compares weight, if it passes then it updates with the new smallest to right
 
             if (smallest == pos) break;
 
-            swap(data[pos], data[smallest]);
-            pos = smallest;
+            swap(data[pos], data[smallest]); //swaps data and does the reogrnization
+            pos = smallest; //pos replaces smallest
         }
 
     }

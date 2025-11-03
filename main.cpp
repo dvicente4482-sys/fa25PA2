@@ -108,9 +108,9 @@ int buildEncodingTree(int nextFree) {
         Heap.push(i,weightArr);
     }
     while (Heap.size>1) {
-        int a = Heap.pop(weightArr);
-        int b = Heap.pop(weightArr);
-        int parent = nextFree++;
+        int a = Heap.pop(weightArr); //Stores top value
+        int b = Heap.pop(weightArr); //stores value
+        int parent = nextFree++; //increments to parent
         if (nextFree > MAX_NODES) { //Check condition for Size
             cout<<" Exceeded Max Nodes";
             break;
@@ -119,9 +119,9 @@ int buildEncodingTree(int nextFree) {
         leftArr[parent]  = a; //Identifies left child as A
         rightArr[parent] = b; //Identifies right child as B
 
-        Heap.push(parent,weightArr); //Pushes new parent back int othe heap
+        Heap.push(parent,weightArr); //Pushes new parent back int other heap
     }
-    int root = Heap.pop(weightArr);
+    int root = Heap.pop(weightArr); //root is the top after size becomes less than 1
     return root; //returns root
 }
 
@@ -139,24 +139,25 @@ void generateCodes(int root, string codes[]) {
     while (!tempStack.empty()) {
         auto p = tempStack.top(); // Retrieves top when stack is not empty
         //To view neighboring i should A, pop it, or B, use nodes
-        int node = p.first;
-        string path = p.second;
+        int node = p.first; //Stores the data of int of <int, string>
+        string path = p.second; //Stores the data of string of <int, string>
         tempStack.pop();
-        int L = leftArr[node];
-        int R = rightArr[node];
+        int L = leftArr[node];//Stores child index
+        int R = rightArr[node];//Stores child index
         // Left edge adds '0', right edge adds '1'.
 
-        codes[node] = path; //Updates code with stack
+        //codes[node] = path; //Corrupted the array went out of bounds
 
 
         // Record code when a leaf node is reached.
-        if (L == -1 && R == -1) {
-            char ch = charArr[node];
+        if (L == -1 && R == -1) { //checks if no children
+            char ch = charArr[node]; //character stored at this leaf
             if (ch >= 'a' && ch <= 'z')
                 codes[ch - 'a'] = path.empty() ? "0" : path;
+            //safety check
         } else {
-            if (R != -1) tempStack.emplace(R, path + '1');
-            if (L != -1) tempStack.emplace(L, path + '0');
+            if (R != -1) tempStack.emplace(R, path + '1'); //right appends 1
+            if (L != -1) tempStack.emplace(L, path + '0'); //left appends 0
             // Left edge adds '0', right edge adds '1'.
         }
     }
