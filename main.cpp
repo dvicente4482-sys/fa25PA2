@@ -142,13 +142,24 @@ void generateCodes(int root, string codes[]) {
         int node = p.first;
         string path = p.second;
         tempStack.pop();
-        //Something becomes the value of P.
+        int L = leftArr[node];
+        int R = rightArr[node];
+        // Left edge adds '0', right edge adds '1'.
+
         codes[node] = path; //Updates code with stack
+
+
+        // Record code when a leaf node is reached.
+        if (L == -1 && R == -1) {
+            char ch = charArr[node];
+            if (ch >= 'a' && ch <= 'z')
+                codes[ch - 'a'] = path.empty() ? "0" : path;
+        } else {
+            if (R != -1) tempStack.emplace(R, path + '1');
+            if (L != -1) tempStack.emplace(L, path + '0');
+            // Left edge adds '0', right edge adds '1'.
+        }
     }
-
-    // Left edge adds '0', right edge adds '1'.
-    // Record code when a leaf node is reached.
-
 
 }
 
