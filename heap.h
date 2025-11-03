@@ -33,8 +33,8 @@ struct MinHeap {
         // TODO: insert index at end of heap, restore order using upheap()
         data[size] = idx;
         //upheap(node/pos, wieghtArr)
-        upheap(idx, weightArr);
-        size++;
+        upheap(size, weightArr);
+        ++size;
     }
 
     int pop(int weightArr[]) {
@@ -57,8 +57,8 @@ struct MinHeap {
         //Implement the parent and Left/right methods to achieve the logic and function.
         while (pos>0) {
             int Par = parent(pos);
-            if (weightArr[pos] >= weightArr[Par]) break;
-            swap(weightArr[pos],weightArr[Par]);//exchanges two values/variables of the same type.
+            if (weightArr[data[pos]] >= weightArr[data[Par]]) break; //Compares weights, changed to compare with data[par] instead of just par. Pos is the heap index not the data index.
+            swap(data[pos], data[Par]); //exchanges two values/variables of the same type.
             pos = Par;
         }//Ripped Straight out of the C++ Supplement
 
