@@ -131,24 +131,17 @@ void generateCodes(int root, string codes[]) {
     // Use stack<pair<int, string>> to simulate DFS traversal.
     //DFS traversal means: its a way of traversing a tree through nodes and their neighbors
     //Starts at Top then traverses down to neighbors
-
     stack<pair<int, string>> tempStack;
-
-
     tempStack.emplace(root, ""); //Directly adds to stack.
     while (!tempStack.empty()) {
         auto p = tempStack.top(); // Retrieves top when stack is not empty
-        //To view neighboring i should A, pop it, or B, use nodes
+
         int node = p.first; //Stores the data of int of <int, string>
         string path = p.second; //Stores the data of string of <int, string>
         tempStack.pop();
         int L = leftArr[node];//Stores child index
         int R = rightArr[node];//Stores child index
         // Left edge adds '0', right edge adds '1'.
-
-        //codes[node] = path; //Corrupted the array went out of bounds
-
-
         // Record code when a leaf node is reached.
         if (L == -1 && R == -1) { //checks if no children
             char ch = charArr[node]; //character stored at this leaf
